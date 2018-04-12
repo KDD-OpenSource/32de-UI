@@ -145,6 +145,33 @@ const Actions = {
         console.error(error);
     });
   },
+  saveNewDataset(url, name, username, password){
+    alert("URL: " + url + "\nName: " + name + "\nUsername: " + username + "\nPassword: " + password);
+    fetch(process.env.REACT_APP_API_HOST + 'save-new-dataset', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        url: url,
+        name: name,
+        username: username,
+        password: password
+      }),
+      credentials: 'include'
+    }).then((response) => { return response.json(); }).then((json) => {
+      if (!(json.status === 200)){
+        alert('Could not save new dataset');
+      }
+      else {
+        alert('Saved dataset');
+        AccountActions.loadDatasets();
+      }
+    }).catch((error) => {
+        console.error(error);
+    });
+  },
   fetchSimilarityScore(){
     fetch(process.env.REACT_APP_API_HOST + 'get-similarity-score', {
         method: 'GET',

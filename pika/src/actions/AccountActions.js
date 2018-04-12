@@ -32,10 +32,10 @@ const Actions = {
     MetaPathAPI.getAvailableDatasets();
   },
 
-  selectDataset(dataset){
+  selectDataset(dataset_id){
     AccountDispatcher.dispatch({
       type: AccountActionTypes.DATASET_SELECTION,
-      payload: {dataset: dataset}
+      payload: {dataset_id: dataset_id}
     })
   },
   
@@ -56,6 +56,41 @@ const Actions = {
       type: AccountActionTypes.LOAD_DATASETS_RESPONSE,
       payload: {datasets: datasets}
     });
+  },
+
+  updateNewDatasetUrl(url){
+    AccountDispatcher.dispatch({
+      type: AccountActionTypes.UPDATE_NEW_DATASET_URL,
+      payload: {url: url}
+    });
+  },
+
+  updateNewDatasetName(name){
+    AccountDispatcher.dispatch({
+      type: AccountActionTypes.UPDATE_NEW_DATASET_NAME,
+      payload: {name: name}
+    });
+  },
+
+  updateNewDatasetUsername(username){
+    AccountDispatcher.dispatch({
+      type: AccountActionTypes.UPDATE_NEW_DATASET_USERNAME,
+      payload: {username: username}
+    });
+  },
+
+  updateNewDatasetPassword(password){
+    AccountDispatcher.dispatch({
+      type: AccountActionTypes.UPDATE_NEW_DATASET_PASSWORD,
+      payload: {password: password}
+    });
+  },
+
+  saveNewDataset(url, name, username, password){
+    AccountDispatcher.dispatch({
+      type: AccountActionTypes.SAVE_NEW_DATASET
+    });
+    MetaPathAPI.saveNewDataset(url, name, username, password);
   }
 
 };
